@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建一个新事务</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        #finish{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>创建一个新事务</h1>
+    <div>
+        <p>事务名称:</p>
+        <textarea type="text" id="task-name" rows="1"></textarea>
+    </div>
+    <div>
+        <p>事务详情：</p>
+        <textarea type="text" id="task-content" rows="5" cols="240"></textarea>
+    </div>
+    <div>
+        <p>参与人员：</p>
+        <ul id="related-personal">
+            <li>
+                <input type="text">
+        </ul>
+        <button id="personal-add">添加</button>
+    </div>
+    <br>
+    <div>
+        <span>开始时间：</span>
+        <input type="date" id="begin-time">
+    </div>
+    <br>
+    <div>
+        <span>截止时间：</span>
+        <input type="date" id="end-time">
+    </div>
+    <div>
+        <p>备注：</p>
+        <textarea id="remark" cols="240" rows="10"></textarea>
+    </div>
+    <br>
+    <div id="finish">
+        <input type="button" value="确认添加">
+    </div>
+    <script>
+        var addRelatedPersonal = document.getElementById("personal-add");
+        addRelatedPersonal.onclick = function(){
+            var list = document.getElementById("related-personal");
+            list.innerHTML += '<li>' + '<input type="text">' + '</li>';
+        }
+        // 参与人员中添加按钮的实现
+    </script>
+</body>
+</html>
