@@ -29,6 +29,7 @@
         <!-- 点击后跳转到编辑事务页面 -->
         <button onclick="location.href = './Creat New Task.html'" id="button-creat">创建一个新事务</button>
     </div>
+    <p id="dataDisplay"></p>
     <!-- 事务待办 -->
     <ul id="task-to-do">
         <div>
@@ -37,12 +38,12 @@
         <li class="subjectName">
             <span>事务1</span>
             <button id = "task-to-do-start" onclick="moveItem(this, 'task-to-do', 'task-doing')">开始执行</button>
-            <button id = "task-to-do-chack">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
         <li class="subjectName">
             <span>事务2</span>
             <button id = "task-doing-finish" onclick="moveItem(this, 'task-to-do', 'task-doing')">开始执行</button>
-            <button id = "task-doing-check">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
     </ul>
     <!-- 事务进行中 -->
@@ -55,12 +56,12 @@
         <li class="subjectName">
             <span>事务1</span>
             <button id = "task-doing-finish" onclick="moveItem(this, 'task-doing', 'task-finish')">完成</button>
-            <button id = "task-doing-check">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
         <li class="subjectName">
             <span>事务2</span>
             <button id = "task-doing-finish" onclick="moveItem(this, 'task-doing', 'task-finish')">完成</button>
-            <button id = "task-doing-check">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
     </ul>
     <!-- 事务已完成 -->
@@ -73,12 +74,12 @@
         <li class="subjectName">
             <span>事务1</span>
             <button id = "task-finish-del" onclick="deleteItem(this)">删除</button>
-            <button id = "task-finish-check">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
         <li class="subjectName">
             <span>事务2</span>
             <button id = "task-finish-del" onclick="deleteItem(this)">删除</button>
-            <button id = "task-finish-check">查看详情</button>
+            <button class = "ckeck">查看详情</button>
         </li>
     </ul>
     <script>
@@ -105,6 +106,27 @@
             var ul = li.parentNode;
             ul.removeChild(li);
         }
+        function displayData() {
+            // 解析URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const inputText1 = urlParams.get("name");
+            
+            // 在页面中显示第一个输入框的内容
+            const displayList = document.getElementById("task-to-do");
+            const li = document.createElement("li");
+            var linewButton1 = document.createElement("button");
+            var targetListinput = document.getElementById('task-to-do');
+            linewButton1.textContent = targetListinput.querySelector("button").textContent;
+            linewButton1.onclick = targetListinput.querySelector("button").onclick
+            var linewButton2 = document.createElement("button");
+            linewButton2.textContent = "查看详情";
+            li.textContent = inputText1;
+            li.appendChild(linewButton1);
+            li.appendChild(linewButton2);
+            displayList.appendChild(li);
+        }
+        
+        displayData();
     </script>
 </body>
 </html>
