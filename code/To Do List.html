@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        /* 标题美化 */
+        h1{
+            text-align: center;
+        }
+        #task-input{
+            text-align: center;
+        }
+        /* 按钮美化 */
+        #button-creat{
+            padding: 25px;
+        }
+    </style>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <!-- 标题 -->
+    <h1 id="head title">To Do List</h1>
+    <!-- 创建新事务 -->
+    <div  id="task-input">
+        <!-- 点击后跳转到编辑事务页面 -->
+        <button onclick="location.href = './Creat New Task.html'" id="button-creat">创建一个新事务</button>
+    </div>
+    <p id="dataDisplay"></p>
+    <!-- 事务待办 -->
+    <ul id="task-to-do">
+        <div>
+            <p>待办事务：</p>
+        </div>
+        <li class="subjectName">
+            <span>事务1</span>
+            <button id = "task-to-do-start" onclick="moveItem(this, 'task-to-do', 'task-doing')">开始执行</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+        <li class="subjectName">
+            <span>事务2</span>
+            <button id = "task-doing-finish" onclick="moveItem(this, 'task-to-do', 'task-doing')">开始执行</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+    </ul>
+    <!-- 事务进行中 -->
+    <ul id="task-doing">
+        <div>
+            <p>
+                进行中事务：
+            </p>
+        </div>
+        <li class="subjectName">
+            <span>事务1</span>
+            <button id = "task-doing-finish" onclick="moveItem(this, 'task-doing', 'task-finish')">完成</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+        <li class="subjectName">
+            <span>事务2</span>
+            <button id = "task-doing-finish" onclick="moveItem(this, 'task-doing', 'task-finish')">完成</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+    </ul>
+    <!-- 事务已完成 -->
+    <ul id="task-finish">
+        <div>
+            <p>
+                已完成事务：
+            </p>
+        </div>
+        <li class="subjectName">
+            <span>事务1</span>
+            <button id = "task-finish-del" onclick="deleteItem(this)">删除</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+        <li class="subjectName">
+            <span>事务2</span>
+            <button id = "task-finish-del" onclick="deleteItem(this)">删除</button>
+            <button class = "ckeck">查看详情</button>
+        </li>
+    </ul>
+    <script>
+        //将一个列表中的元素移到另一个列表中
+        function moveItem(button, sourceId, targetId) {
+            var listItem = button.parentNode;
+            var targetList = document.getElementById(targetId);
+            var newListItem = document.createElement("li");
+            newListItem.innerHTML = listItem.innerHTML;
+
+            var newButton = document.createElement("button");
+            newButton.textContent = targetList.querySelector("button").textContent;
+            newButton.onclick = targetList.querySelector("button").onclick;
+
+            newListItem.replaceChild(newButton, newListItem.querySelector("button"));
+
+            targetList.appendChild(newListItem);
+
+            listItem.parentNode.removeChild(listItem);
+        }
+        //将列表中指定元素删除
+        function deleteItem(button) {
+            var li = button.parentNode;
+            var ul = li.parentNode;
+            ul.removeChild(li);
+        }
+        function displayData() {
+            // 解析URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const inputText1 = urlParams.get("name");
+            
+            // 在页面中显示第一个输入框的内容
+            const displayList = document.getElementById("task-to-do");
+            const li = document.createElement("li");
+            var linewButton1 = document.createElement("button");
+            var targetListinput = document.getElementById('task-to-do');
+            linewButton1.textContent = targetListinput.querySelector("button").textContent;
+            linewButton1.onclick = targetListinput.querySelector("button").onclick
+            var linewButton2 = document.createElement("button");
+            linewButton2.textContent = "查看详情";
+            li.textContent = inputText1;
+            li.appendChild(linewButton1);
+            li.appendChild(linewButton2);
+            displayList.appendChild(li);
+        }
+        
+        displayData();
+    </script>
+</body>
+</html>
